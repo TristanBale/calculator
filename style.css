@@ -59,7 +59,8 @@ button {
     background-color: #EAEAEA;
 }
 
-.specialButtons_and_Clear {
+.specialButtons_and_Clear,
+.clearBtn {
     background-color: #4F6D7A;
 }
 
