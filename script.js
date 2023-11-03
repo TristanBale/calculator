@@ -69,9 +69,12 @@ numberButtons.map(button => {
     button.addEventListener('click', () => { 
         clearScreenAfterError()
         let text = button.textContent;
-        //console.log(`text is: ${text}`);
+
         switch (ticker%2) {
             case 0: //not yet pressed/ holding a value, so allocate 0 to 'a'
+                if (displayOutput.textContent == previousResult) {
+                    displayOutput.innerText = '';
+                }
                 currentNumber['num'] += text; //eg pressing 3, text = '3'
                 let a = currentNumber['num'];
                 let numberOfCharactersOnDisplay = displayOutput.textContent;
@@ -81,6 +84,9 @@ numberButtons.map(button => {
                 //console.log(typeof +a);
                 break;
             case 1: //currently holding a value, so we have to allocate 0 to 'b' (b should be false if we programmed right), and set 'b' status to true after we allocated 0. and set currentNumber back to false to take next value
+                if (displayOutput.textContent == previousResult) {
+                    displayOutput.innerText = '';
+                }
                 nextNumber['num'] += text;
                 let b = nextNumber['num'];
                 displayOutput.innerHTML += text;
@@ -94,6 +100,9 @@ numberButtons.map(button => {
 
 operatorButtons.map(button => {
     button.addEventListener('click', () => {
+        if (op !== '' && op !== '-') {
+            return false;
+        }
         op = button.textContent;
         ticker += 1;
         displayOutput.innerText += op;
@@ -123,19 +132,42 @@ function onEquals() {
     numbersOnDisplay = numbersOnDisplay.split(op);
     let a = +numbersOnDisplay[0];
     let b = +numbersOnDisplay[1];
-    //console.log(typeof numbersOnDisplay);
-    console.log(numbersOnDisplay);
-    console.log(`a after split is: ${a}`);
-    console.log(`b after split is: ${b}`);
-    console.log(`op is: ${op}`);
-    let result = operate(a, op, b);
-    result = sliceValueToFitDisplay(result);
-    displayOutput.innerText = result;
-    previousResult = result;
 
-    op = '';
-    currentNumber['num'] = '';
-    nextNumber['num'] = '';
+    if (op == '-') {
+        a = +numbersOnDisplay[0]
+        b = +numbersOnDisplay[numbersOnDisplay.length - 1] //gives us last item in array
+        if (numbersOnDisplay.length % 2 == 1) { //amount of '' gaps is 1 less number of '-' signs used. eg a - - b --> [a, '', b], therefore, if array.length is odd, means we a double negative happened and we wanna add
+            let result = operate(a, '+', b);
+            displayOutput.innerText = result;
+            previousResult = result;
+            console.log(`previous result is ${previousResult}`);
+            op = '';
+            currentNumber['num'] = '';
+            nextNumber['num'] = '';
+        } else {
+            let result = operate(a, '-', b);
+            displayOutput.innerText = result;
+            previousResult = result;
+            console.log(`previous result is ${previousResult}`);
+            op = '';
+            currentNumber['num'] = '';
+            nextNumber['num'] = '';
+        }
+    } else {
+        //console.log(typeof numbersOnDisplay);
+        console.log(numbersOnDisplay);
+        console.log(`a after split is: ${a}`);
+        console.log(`b after split is: ${b}`);
+        console.log(`op is: ${op}`);
+        let result = operate(a, op, b);
+        result = sliceValueToFitDisplay(result);
+        displayOutput.innerText = result;
+        previousResult = result;
+        console.log(`previous result is ${previousResult}`);
+        op = '';
+        currentNumber['num'] = '';
+        nextNumber['num'] = '';
+    }
 }
 
 function clearScreenAfterError() {
@@ -165,4 +197,4 @@ function computeCurrentTwoValues() {
     } else {
         return false;
     }
-}
+}   
