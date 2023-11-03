@@ -11,31 +11,33 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
 }
 
 .calcBody {
-    background-color: darkgray;
+    background-color: black;
     padding: 10px;
     border: 3px solid black;
     box-sizing: border-box;
-    width: 300px;
-    height: 400px;
+    width: 400px;
+    height: 500px;
     display: flex;
     flex-direction: column;
 }   
 
 .displayContainer {
-    background-color: lavenderblush;
-    height: 50px;
-    font-size: 32px;
+    background-color: #E8DAB2;
+    height: 90px;
+    font-size: 60px;
     display: flex;
     justify-content: flex-end;
     padding-right: 5px;
     align-items: center;
     margin-bottom: 10px;
+    border: 2px solid darkgrey;
 }
 
 .buttonContainer {
     display: flex;
     flex-direction: column;
-    flex: auto;   
+    flex: auto;  
+    border: 1px solid darkgrey; 
 }
 
 .buttonRow {
@@ -47,16 +49,35 @@ button {
    min-width: 50px;
    min-height: 50px;
    flex: 1;
+   font-size: 24px;
+   background-color: #EAEAEA;
+}
+
+.numberButton,
+.zeroButton,
+.decimalButton {
+    background-color: #EAEAEA;
+}
+
+.specialButtons_and_Clear {
+    background-color: #4F6D7A;
+}
+
+.operatorButton {
+    background-color: #C0D6DF;
 }
 
 .zeroButton {
+    min-width: 50%;
+    box-sizing: border-box;
     flex-grow: 2;
 }
 
 .decimalButton {
-    
+    flex-grow: 1;
 }
 
 .equalButton {
-    
+    flex-grow: 1;
+    background-color: #DD6E42;
 }
