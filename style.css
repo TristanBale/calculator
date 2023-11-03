@@ -11,7 +11,7 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
 }
 
 .calcBody {
-    background-color: black;
+    background-color: #131B23;
     padding: 10px;
     border: 3px solid black;
     box-sizing: border-box;
@@ -19,25 +19,31 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
     height: 500px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
 }   
 
 .displayContainer {
     background-color: #E8DAB2;
     height: 90px;
-    font-size: 60px;
+    font-size: 36px;
+    text-wrap: wrap;
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     padding-right: 5px;
-    align-items: center;
+    align-items: start;
     margin-bottom: 10px;
-    border: 2px solid darkgrey;
+    border: 2px solid black;
+    border-radius: 5px;
 }
+
 
 .buttonContainer {
     display: flex;
     flex-direction: column;
     flex: auto;  
-    border: 1px solid darkgrey; 
+    border: 0px solid darkgrey; 
+    background-color: black;
 }
 
 .buttonRow {
@@ -51,6 +57,7 @@ button {
    flex: 1;
    font-size: 24px;
    background-color: #EAEAEA;
+   border-radius: 5px;
 }
 
 .numberButton,
@@ -59,7 +66,8 @@ button {
     background-color: #EAEAEA;
 }
 
-.specialButtons_and_Clear,
+.powerBtn,
+.signChangeBtn,
 .clearBtn {
     background-color: #4F6D7A;
 }
