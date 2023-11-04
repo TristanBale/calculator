@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Calculator </title>
     <link rel="stylesheet" href="./style.css">
-    <script src="./script_for_2valueDisplay.js" defer></script> <!-- remember to add the defer to ensure the DOM loads before the script is run, if not there will be no elements created yet to be querySelected or listened for-->
+    <script src="./script_odin_requirements_1valueDisplay.js" defer></script> <!-- remember to add the defer to ensure the DOM loads before the script is run, if not there will be no elements created yet to be querySelected or listened for-->
 </head>
 
 <body>
     
     <div class="webContainer">  
-
+        
+        <div class="isOperatorPressed">false</div>
         <div class="calcBody">
 
             <div class="displayContainer">
-                
-                <div class="previousOperand">123+</div>
-                <div class="currentOperand">456</div>
-                
+                <div class="previousOperand"></div>
+                <div class="currentOperand"></div>
             </div>
 
             <div class="buttonContainer">
@@ -52,7 +51,7 @@
                 
                 <div class="buttonRow">
                     <button class="zeroButton">0</button>
-                    <button class="numberButton">.</button>
+                    <button class="decimalButton">.</button>
                     <button class="equalButton">=</button>
                 </div>
 

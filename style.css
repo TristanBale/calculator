@@ -10,6 +10,11 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
     background-color: lavender;
 }
 
+.isOperatorPressed {
+    margin: 20px;
+    padding: 5px;
+}
+
 .calcBody {
     background-color: #131B23;
     padding: 10px;
@@ -45,10 +50,12 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
 }
 
 .previousOperand {
+    color: black .75;
     font-size: 1.5rem;
 }
 
 .currentOperand {
+    color: black;
     font-size: 2.5rem;
 }
 
