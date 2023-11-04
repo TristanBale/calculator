@@ -26,15 +26,17 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
     background-color: #E8DAB2;
     height: 90px;
     font-size: 36px;
-    text-wrap: wrap;
     display: flex;
     justify-content: flex-end;
-    flex-wrap: wrap;
     padding-right: 5px;
     align-items: start;
     margin-bottom: 10px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    
 }
 
 
@@ -58,6 +60,7 @@ button {
    font-size: 24px;
    background-color: #EAEAEA;
    border-radius: 5px;
+   outline: none;
 }
 
 .numberButton,
