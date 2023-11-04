@@ -163,9 +163,15 @@ clearBtn.addEventListener('click', () => {
 
 deleteBtn.addEventListener('click', () => {
     let currentItemsOnDisplay = displayOutput.innerText;
+    let poppedItem = currentItemsOnDisplay.slice(-1);
+    console.log(poppedItem);
     currentItemsOnDisplay = currentItemsOnDisplay.slice(0,-1);
     displayOutput.innerText = currentItemsOnDisplay;
     isOperatorPressed = false;
+    isOperatorPressedDisplay.innerText = isOperatorPressed;
+    if (poppedItem == op) {
+        op = '';
+    }
     if (previousOperand['status'] == true) {
         let a = previousOperand['num']
         a = a.toString();
