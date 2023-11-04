@@ -44,11 +44,19 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
     border: 0px solid black;
 }
 
+.previousOperand {
+    font-size: 1.5rem;
+}
+
+.currentOperand {
+    font-size: 2.5rem;
+}
+
 
 .buttonContainer {
     display: flex;
     flex-direction: column;
-    flex: auto;  
+    flex: 1 0 auto;  
     border: 0px solid darkgrey; 
     background-color: black;
 }
@@ -60,13 +68,14 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
 
 button {
    min-width: 50px;
-   min-height: 50px;
-   flex: 1;
+   min-height: 72.8px;
+   flex: 1 0 0;
    font-size: 24px;
    background-color: #EAEAEA;
    border-radius: 5px;
    outline: none;
    cursor: pointer;
+   flex-shrink: 0;
 }
 
 .numberButton,
@@ -82,13 +91,13 @@ button {
 }
 
 .powerBtn,
-.signChangeBtn,
+.deleteBtn,
 .clearBtn {
     background-color: #4F6D7A;
 }
 
 .powerBtn:hover,
-.signChangeBtn:hover,
+.deleteBtn:hover,
 .clearBtn:hover {
     background-color: #7fafc4;
 }

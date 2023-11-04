@@ -22,6 +22,8 @@ let nextNumber = {
 
 const buttonContainer = document.querySelector('.buttonContainer');
 const displayOutput = document.querySelector('.displayContainer');
+const previousOperand = document.querySelector('.previousOperand');
+const currentOperand = document.querySelector('.currentOperand');
 const equalButton = document.querySelector('.equalButton');
 const zeroButton = document.querySelector('.zeroButton');
 const nodeListOfNumberButtons = document.querySelectorAll('.numberButton'); //this is a nodelist
@@ -30,6 +32,7 @@ const nodelistOfOperatorButtons = document.querySelectorAll('.operatorButton');
 const operatorButtons = Array.from(nodelistOfOperatorButtons);
 const powerBtn = document.querySelector('.powerBtn');
 const clearBtn = document.querySelector('.clearBtn');
+const deleteBtn = document.querySelector('.deleteBtn');
 
 zeroButton.addEventListener('click', () => { 
     console.log('zero button clicked');
@@ -54,19 +57,19 @@ numberButtons.map(button => {
 
         switch (ticker%2) {
             case 0: 
-                if (displayOutput.textContent == previousResult) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
+                if (displayOutput.textContent == previousResult || previousResult == NaN) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
                     displayOutput.innerText = '';
                 }
                 currentNumber['num'] += text; //eg pressing 3, text = '3'
                 let a = currentNumber['num'];
                 let numberOfCharactersOnDisplay = displayOutput.textContent;
-                sliceValueToFitDisplay(numberOfCharactersOnDisplay);
+                //sliceValueToFitDisplay(numberOfCharactersOnDisplay);
                 displayOutput.innerText += text;
                 console.log(`we are on a: ${a}`);
                 //console.log(typeof +a);
                 break;
             case 1: //currently holding a value, so we have to allocate 0 to 'b' (b should be false if we programmed right), and set 'b' status to true after we allocated 0. and set currentNumber back to false to take next value
-                if (displayOutput.textContent == previousResult) {
+                if (displayOutput.textContent == previousResult || previousResult == NaN) {
                     displayOutput.innerText = '';
                 }
                 nextNumber['num'] += text;
@@ -172,7 +175,7 @@ function onEquals() {
         console.log(`b after split is: ${b}`);
         console.log(`op is: ${op}`);
         let result = operate(a, op, b);
-        result = sliceValueToFitDisplay(result);
+        //result = sliceValueToFitDisplay(result);
         displayOutput.innerText = result;
         previousResult = result;
         console.log(`previous result is ${previousResult}`);
