@@ -21,6 +21,7 @@ const displayOutput = document.querySelector('.displayContainer');
 const nodeListOfNumberButtons = document.querySelectorAll('.numberButton'); //this is a nodelist
 const numberButtons = Array.from(nodeListOfNumberButtons); //makes nodelist into an array
 const zeroButton = document.querySelector('.zeroButton');
+const decimalButton = document.querySelector('.decimalButton');
 
 const nodelistOfOperatorButtons = document.querySelectorAll('.operatorButton');
 const operatorButtons = Array.from(nodelistOfOperatorButtons);
@@ -33,8 +34,14 @@ const equalButton = document.querySelector('.equalButton');
 numberButtons.map(button => {
     button.addEventListener('click', () => {
         let number = button.textContent;
-          
-        if (displayOutput.textContent == previousResult || previousResult == NaN) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
+        
+        if (isNaN(previousResult)) {
+            displayOutput.innerText = '';
+            previousResult = '';
+            currentOperand['num'] = '';
+        }
+
+        if (displayOutput.textContent == previousResult) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
             displayOutput.innerText = '';
             previousOperand['num'] = '';
             previousOperand['status'] = true,
@@ -65,7 +72,7 @@ numberButtons.map(button => {
 
 zeroButton.addEventListener('click', () => {
         let number = zeroButton.textContent;
-        if (displayOutput.textContent == previousResult || previousResult == NaN) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
+        if (displayOutput.textContent == previousResult) { // this if statement ensures that if a number is pressed after a final result, the screen changes to that number instead of appending to the back of finalResult 
             displayOutput.innerText = '';
             previousOperand['num'] = previousResult;
             previousOperand['status'] = false,
@@ -93,8 +100,6 @@ zeroButton.addEventListener('click', () => {
         checkStatus(id)
 })
 
-const decimalButton = document.querySelector('.decimalButton');
-
 decimalButton.addEventListener('click', () => {
     let decimal = decimalButton.textContent;
 
@@ -102,7 +107,7 @@ decimalButton.addEventListener('click', () => {
        return;
     }
 
-    if (displayOutput.textContent == previousResult || previousResult == NaN) {
+    if (displayOutput.textContent == previousResult) {
         displayOutput.innerText = '';
         previousOperand['num'] = previousResult;
         previousOperand['status'] = false;
@@ -136,12 +141,16 @@ decimalButton.addEventListener('click', () => {
     checkStatus(id);
 });
 
-
 operatorButtons.map(button => {
     button.addEventListener('click', () => {
         previousOperand['status'] = false;
         let operator = button.textContent;
         console.log(`op is ${operator}`);
+        checkStatus(id);
+        if (previousOperand['num'] == ''){
+            return;
+        }
+
         if (op == '') {
             op = operator;
             displayOutput.innerText += op;
@@ -164,7 +173,7 @@ clearBtn.addEventListener('click', () => {
 deleteBtn.addEventListener('click', () => {
     let currentItemsOnDisplay = displayOutput.innerText;
     let poppedItem = currentItemsOnDisplay.slice(-1);
-    console.log(poppedItem);
+    console.log(`poppedItem is ${poppedItem}`);
     currentItemsOnDisplay = currentItemsOnDisplay.slice(0,-1);
     displayOutput.innerText = currentItemsOnDisplay;
     isOperatorPressed = false;
@@ -189,6 +198,9 @@ deleteBtn.addEventListener('click', () => {
 
 equalButton.addEventListener('click', onEquals);
 
+
+//functions 
+
 function operate(a, op, b) {
     a = +a;
     b = +b;
@@ -204,7 +216,7 @@ function operate(a, op, b) {
             return a * b;
             break;
         case '/':
-            return parseFloat((a/b).toFixed(5));
+            return parseFloat((a/b).toFixed(7));
             break;
         case '^':
             return a ** b;
@@ -221,26 +233,35 @@ function onEquals() {
     console.log(`currentOperand is ${currentOperand['num']}`);
 
     previousResult = result;
-    console.log(`previousResult is ${previousResult}`);
-    displayOutput.innerText = previousResult;
+    if (previousOperand['num'] === '') {
+        // Handle the case where no numbers have been entered yet.
+        // You can display an error message or take any other appropriate action.
+        return;
+    }
+    
+    else if (isNaN(previousResult)) {
+        previousOperand['num'] = ''
+        previousOperand['status'] = true;
+        currentOperand['status'] = false;
+        console.log(`previousResult is ${previousResult}`);
+        displayOutput.innerText = previousResult;
+        //previousResult = '';
+        isOperatorPressed = false;
+        op = '';
+    } else {
+        console.log(`previousResult is ${previousResult}`);
+        displayOutput.innerText = previousResult;
 
-    previousOperand['num'] = previousResult;
-    previousOperand['status'] = true;
-    currentOperand['num'] = '';
-    currentOperand['status'] = false;
-    op = '';
+        previousOperand['num'] = previousResult;
+        previousOperand['status'] = true;
+        currentOperand['num'] = '';
+        currentOperand['status'] = false;
+        op = '';
 
-    isOperatorPressed = false;
-    isOperatorPressedDisplay.innerText = isOperatorPressed;
-}
-
-function checkIfOperatorIsPressed() {
-    if (isOperatorPressed) {
         isOperatorPressed = false;
         isOperatorPressedDisplay.innerText = isOperatorPressed;
-    } else {
-        isOperatorPressed = true;
-        isOperatorPressedDisplay.innerText = isOperatorPressed;
+
+        console.log('');
     }
 }
 
@@ -263,4 +284,3 @@ function decimalLimit(array) {
 
     return previousHasDecimal && currentHasDecimal;
 }
-
