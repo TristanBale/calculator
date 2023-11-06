@@ -65,7 +65,7 @@ numberButtons.map(button => {
             currentOperand['status'] = true;
             displayOutput.innerText += number;
             isOperatorPressed = false;
-            isOperatorPressedDisplay.innerText = isOperatorPressed;
+            //isOperatorPressedDisplay.innerText = isOperatorPressed;
         } 
         checkStatus(id)
     })
@@ -103,7 +103,7 @@ zeroButton.addEventListener('click', () => {
             currentOperand['status'] = true;
             displayOutput.innerText += number;
             isOperatorPressed = false;
-            isOperatorPressedDisplay.innerText = isOperatorPressed;
+            //isOperatorPressedDisplay.innerText = isOperatorPressed;
         } 
         checkStatus(id)
 })
@@ -141,7 +141,7 @@ decimalButton.addEventListener('click', () => {
             displayOutput.innerText += decimal;
         }
         isOperatorPressed = false;
-        isOperatorPressedDisplay.innerText = isOperatorPressed;
+        //isOperatorPressedDisplay.innerText = isOperatorPressed;
     }
     checkStatus(id);
 });
@@ -158,7 +158,7 @@ operatorButtons.map(button => {
             previousOperand['status'] = true;
             displayOutput.innerText += operator;
             isOperatorPressed = false; //only false for this case as we want the number to be input to remain as previousOperand, but how our code works is that it will automatically change to current after an operator is pressed, but as you can see, this wont work if the screen was not empty
-            isOperatorPressedDisplay.innerText = isOperatorPressed;
+            //isOperatorPressedDisplay.innerText = isOperatorPressed;
         }
 
         else if (displayOutput.textContent == previousResult) {
@@ -177,7 +177,7 @@ operatorButtons.map(button => {
             op = operator;
             displayOutput.innerText += op;
             isOperatorPressed = true;
-            isOperatorPressedDisplay.innerText = isOperatorPressed;
+            //isOperatorPressedDisplay.innerText = isOperatorPressed;
         } else {
             return;
         }
@@ -189,7 +189,7 @@ clearBtn.addEventListener('click', () => {
     previousOperand['num'] = '';
     currentOperand['num'] = '';
     isOperatorPressed = false;
-    isOperatorPressedDisplay.innerText = isOperatorPressed;
+    //isOperatorPressedDisplay.innerText = isOperatorPressed;
 })
 
 deleteBtn.addEventListener('click', () => {
@@ -201,7 +201,7 @@ deleteBtn.addEventListener('click', () => {
     currentItemsOnDisplay = currentItemsOnDisplay.slice(0,-1);
     displayOutput.innerText = currentItemsOnDisplay;
     isOperatorPressed = false;
-    isOperatorPressedDisplay.innerText = isOperatorPressed;
+    //isOperatorPressedDisplay.innerText = isOperatorPressed;
     if (poppedItem == op) {
         op = '';
     }
@@ -284,7 +284,7 @@ function onEquals() {
         op = '';
 
         isOperatorPressed = false;
-        isOperatorPressedDisplay.innerText = isOperatorPressed;
+        //isOperatorPressedDisplay.innerText = isOperatorPressed;
 
         console.log('');
     }
