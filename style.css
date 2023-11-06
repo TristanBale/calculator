@@ -11,6 +11,10 @@ div { /* idk why this does not work: it did not work earlier as we didnt link it
 }
 
 .isOperatorPressed {
+    border: 0px solid black;
+}
+
+.isOperatorPressed {
     margin: 20px;
     padding: 5px;
 }
