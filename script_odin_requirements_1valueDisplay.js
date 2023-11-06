@@ -36,7 +36,7 @@ numberButtons.map(button => {
     button.addEventListener('click', () => {
         let number = button.textContent;
         
-        if (isNaN(previousResult)) {
+        if (isNaN(previousResult) && previousResult !== 'default') {
             displayOutput.innerText = '';
             previousResult = '';
             currentOperand['num'] = '';
@@ -60,7 +60,7 @@ numberButtons.map(button => {
         }
         
         if (isOperatorPressed) {
-            displayOutput.innerText = '';
+            //displayOutput.innerText = '';
             currentOperand['num'] += number;
             currentOperand['status'] = true;
             displayOutput.innerText += number;
@@ -98,7 +98,7 @@ zeroButton.addEventListener('click', () => {
         }
         
         if (isOperatorPressed) {
-            displayOutput.innerText = '';
+            //displayOutput.innerText = '';
             currentOperand['num'] += number;
             currentOperand['status'] = true;
             displayOutput.innerText += number;
@@ -154,11 +154,23 @@ operatorButtons.map(button => {
         console.log(`op is ${operator}`);
         checkStatus(id);
 
-        if ((displayOutput.textContent == '' || displayOutput.textContent == previousResult) && operator == '-') {
+        if ((displayOutput.textContent == '') && operator == '-') {
             previousOperand['status'] = true;
             displayOutput.innerText += operator;
             isOperatorPressed = false; //only false for this case as we want the number to be input to remain as previousOperand, but how our code works is that it will automatically change to current after an operator is pressed, but as you can see, this wont work if the screen was not empty
             isOperatorPressedDisplay.innerText = isOperatorPressed;
+        }
+
+        else if (displayOutput.textContent == previousResult) {
+            currentOperand['status'] = true;
+            displayOutput.innerText += operator;
+            op = operator;
+        }
+
+        else if ((displayOutput.textContent.slice(-1) == '*' || displayOutput.textContent.slice(-1) == '/' || displayOutput.textContent.slice(-1) == '^')) { //handles dividing, powering and multiplying by negative numbers
+            displayOutput.innerText += operator;
+            currentOperand['status'] = true;
+            currentOperand['num'] += operator;
         }
 
         else if (op == '') {
@@ -184,6 +196,7 @@ deleteBtn.addEventListener('click', () => {
     let currentItemsOnDisplay = displayOutput.innerText;
     let poppedItem = currentItemsOnDisplay.slice(-1);
     console.log('');
+    console.log(`typeof poppedItem is: ${typeof poppedItem}`);
     console.log(`poppedItem is ${poppedItem}`);
     currentItemsOnDisplay = currentItemsOnDisplay.slice(0,-1);
     displayOutput.innerText = currentItemsOnDisplay;
@@ -301,6 +314,8 @@ function decimalLimit(array) {
 
 
 
-//current issues identified with code, cant do .5 + .2 //solved
+//current issues identified with code
+//cant do .5 + .2 //solved
 //initial 6 + 5 del 7 gives 7 instead of 13. //solved
-//
+//cannot divide or multiply by -ve numbers solved
+//cannot power by -ve numbers
