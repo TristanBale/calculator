@@ -204,14 +204,16 @@ deleteBtn.addEventListener('click', () => {
     //isOperatorPressedDisplay.innerText = isOperatorPressed;
     if (poppedItem == op) {
         op = '';
+        previousOperand['status'] = true;
+        currentOperand['status'] = false;
     }
-    if (previousOperand['status'] == true) {
+    else if (previousOperand['status'] == true) {
         let a = previousOperand['num']
         a = a.toString();
         a = a.slice(0,-1);
         previousOperand['num'] = a;
     }
-    if (currentOperand['status'] == true) {
+    else if (currentOperand['status'] == true) {
         let b = currentOperand['num'];
         b = b.toString();
         b  = b.slice(0,-1);
@@ -318,4 +320,5 @@ function decimalLimit(array) {
 //cant do .5 + .2 //solved
 //initial 6 + 5 del 7 gives 7 instead of 13. //solved
 //cannot divide or multiply by -ve numbers solved
-//cannot power by -ve numbers
+//cannot power by -ve numbers solved
+//del operator leaves wrong operand status, line 206 207, verify. solved
