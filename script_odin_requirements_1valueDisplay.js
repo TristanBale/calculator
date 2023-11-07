@@ -134,7 +134,7 @@ decimalButton.addEventListener('click', () => {
     }
 
     if (isOperatorPressed) {
-        displayOutput.innerText = '';
+        //displayOutput.innerText = '';
         if (!currentOperand['num'].includes('.')) {
             currentOperand['num'] += decimal;
             currentOperand['status'] = true;
